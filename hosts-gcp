@@ -1,0 +1,7 @@
+[masters]
+devops-master
+
+[workers]
+dev
+test
+prod
