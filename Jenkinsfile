@@ -25,18 +25,18 @@ pipeline {
 
 	stage ("install docker, curl & https & check docker version"){
 		steps{
-			sh "sudo apt-get update"
+		    sh "sudo apt-get update"
             sh "sudo apt-get install docker.io -y" 
             sh "sudo apt-get update" 
-			sh "sudo apt-get install -y apt-transport-https curl"
-			sh "docker --version"
+		    sh "sudo apt-get install -y apt-transport-https curl"
+		    sh "docker --version"
 
 		}
 	}
 
 	stage('Remove old docker containers if any with same name'){
 	    steps {
-		sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];"
+		sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];fi"
 		}
 	}
 	stage('Build'){
