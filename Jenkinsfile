@@ -15,11 +15,11 @@ pipeline {
 	string(name: 'targetserver', defaultValue: 'j-slave2-CT', description: 'Enter Target server name ')
 	string(name: 'targetserverIP', defaultValue: '15.207.111.16', description: 'Enter Target Server IP ')
     }
-	
+
     stages {
     stage('SCM checkout'){
         steps {
-			checkout([$class: 'GitSCM', branches: [[name: "*/${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'githubCred', url: "${gitURL}"]]])
+			checkout([$class: 'GitSCM', branches: [[name: "*/${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'github-Cred', url: "${gitURL}"]]])
             }
 	}
 
@@ -27,7 +27,8 @@ pipeline {
 		steps{
 			sh "sudo apt-get update"
             sh "sudo apt-get install docker.io -y" 
-            sh "sudo apt-get update && apt-get install -y apt-transport-https curl"
+            sh "sudo apt-get update" 
+			sh "sudo apt-get install -y apt-transport-https curl"
 			sh "docker --version"
 
 		}
