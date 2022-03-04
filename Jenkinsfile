@@ -11,14 +11,17 @@ pipeline {
 	string(name: 'targetserverIP', defaultValue: '15.207.111.16', description: 'Enter Target Server IP ')
     }
 
+	def gitURL = "https://github.com/devopsbymat/DevOps-EndToEndFlow.git"
+	def branchName = "master"
+
     stages {
     stage('SCM checkout'){
         steps {
-		git "https://github.com/devopsbymat/DevOps-EndToEndFlow.git"
+			checkout([$class: 'GitSCM', branches: [[name: "*/${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'githubCred', url: "${gitURL}"]]])
             }
 	}
 
-	stage ("install docker, curl & https & check docker version")){
+	stage ("install docker, curl & https & check docker version"){
 		steps{
 			sh "sudo apt-get update"
             sh "sudo apt-get install docker.io -y" 
