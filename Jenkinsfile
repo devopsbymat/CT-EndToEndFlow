@@ -1,3 +1,8 @@
+
+	
+	def gitURL = 'https://github.com/devopsbymat/DevOps-EndToEndFlow.git'
+	def branchName = 'master'
+
 pipeline {
     agent {
         node {
@@ -10,10 +15,7 @@ pipeline {
 	string(name: 'targetserver', defaultValue: 'j-slave2-CT', description: 'Enter Target server name ')
 	string(name: 'targetserverIP', defaultValue: '15.207.111.16', description: 'Enter Target Server IP ')
     }
-
-	def gitURL = 'https://github.com/devopsbymat/DevOps-EndToEndFlow.git'
-	def branchName = 'master'
-
+	
     stages {
     stage('SCM checkout'){
         steps {
