@@ -1,53 +1,48 @@
 pipeline {
     agent {
         node {
-            label 'slave'
+            label 'devOps-master'
         }
     }
     parameters {
-	string(name: 'imageTag', defaultValue: 'latest', description: 'Enter Docker Image tag')
+	string(name: 'imageTag', defaultValue: 'apache-latest', description: 'Enter Docker Image tag')
 	password(name: 'dockerpass', defaultValue: 'Rahul#143', description: 'Enter docker login password ')
 	string(name: 'targetserver', defaultValue: 'j-slave2-CT', description: 'Enter Target server name ')
 	string(name: 'targetserverIP', defaultValue: '15.207.111.16', description: 'Enter Target Server IP ')
     }
+
     stages {
-        stage('SCM checkout'){
-            steps {
-		git "https://github.com/devopsbymat/devopsIQ.git"
+    stage('SCM checkout'){
+        steps {
+		git "https://github.com/devopsbymat/DevOps-EndToEndFlow.git"
             }
 	}
-	stage('Remove dockers'){
+
+	stage ("install docker, curl & https & check docker version")){
+		steps{
+			sh "sudo apt-get update"
+            sh "sudo apt-get install docker.io -y" 
+            sh "sudo apt-get update && apt-get install -y apt-transport-https curl"
+			sh "docker --version"
+		}
+	}
+
+	stage('Remove old docker containers if any with same name'){
 	    steps {
-		sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo docker rm -f \$(sudo docker ps -a -q);fi"
+		sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];"
 		}
 	}
 	stage('Build'){
 	    steps {
-		    sh "sudo docker build /home/ubuntu/workspace/${JOB_NAME} -t rganjaredocker/devops-ct:${imageTag}"
+		    sh "sudo docker build /home/ubuntu/workspace/${JOB_NAME} -t rganjaredocker/devops-e2e:${imageTag}"
 	   }
 	}	
 	stage('Docker Push'){
 		steps {
 		    sh "sudo docker login --username rganjaredocker --password ${dockerpass}"
-                    sh "sudo docker push rganjaredocker/devops-ct:${imageTag}"
+            sh "sudo docker push rganjaredocker/devops-e2e:${imageTag}"
 	        }
 	}
-	stage('Configure servers with Docker and deploy website') {
-            	steps {
-			sh 'ansible-playbook docker.yaml -i inventory_aws_servers.txt'
-            	}
-        }
-	stage('Install Chrome browser') {
-            	steps {
-                	sh 'ansible-playbook chrome.yaml -e "hostname=localhost"'
-            	}
-        }
-	stage ('Testing'){
-		steps {
-			sh "sudo apt install python3-pip -y"
-			sh "pip3 install selenium"
-			sh "python3 selenium_test.py ${params.targetserverIP}"
-		}
-	}
+
     }
 }
