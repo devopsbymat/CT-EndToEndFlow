@@ -27,6 +27,7 @@ pipeline {
             sh "sudo apt-get install docker.io -y" 
             sh "sudo apt-get update && apt-get install -y apt-transport-https curl"
 			sh "docker --version"
+
 		}
 	}
 
