@@ -11,8 +11,8 @@ pipeline {
 	string(name: 'targetserverIP', defaultValue: '15.207.111.16', description: 'Enter Target Server IP ')
     }
 
-	def gitURL = "https://github.com/devopsbymat/DevOps-EndToEndFlow.git"
-	def branchName = "master"
+	def gitURL = 'https://github.com/devopsbymat/DevOps-EndToEndFlow.git'
+	def branchName = 'master'
 
     stages {
     stage('SCM checkout'){
