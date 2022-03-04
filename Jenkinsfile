@@ -30,19 +30,18 @@ pipeline {
             sh "sudo apt-get update" 
 		    sh "sudo apt-get install -y apt-transport-https curl"
 		    sh "docker --version"
-
 		}
 	}
 
 	stage('Remove old docker containers if any with same name'){
 	    steps {
-		sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];fi"
+			sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];fi"
 		}
 	}
 	stage('Build'){
 	    steps {
 		    sh "sudo docker build /home/ubuntu/jenkins/workspace/${JOB_NAME} -t rganjaredocker/devops-e2e:${imageTag}"
-	   }
+	  	 }
 	}	
 	stage('Docker Push'){
 		steps {
