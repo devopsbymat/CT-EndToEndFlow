@@ -41,7 +41,7 @@ pipeline {
 	}
 	stage('Build'){
 	    steps {
-		    sh "sudo docker build /home/ubuntu/workspace/${JOB_NAME} -t rganjaredocker/devops-e2e:${imageTag}"
+		    sh "sudo docker build /home/ubuntu/jenkins/workspace/${JOB_NAME} -t rganjaredocker/devops-e2e:${imageTag}"
 	   }
 	}	
 	stage('Docker Push'){
