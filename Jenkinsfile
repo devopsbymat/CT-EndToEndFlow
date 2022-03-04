@@ -18,12 +18,12 @@ pipeline {
             }
 	}
 
-	stage ("install docker, curl & https & check docker version")){
-		steps{
-			sh "sudo apt-get update"
-            sh "sudo apt-get install docker.io -y" 
-            sh "sudo apt-get update && apt-get install -y apt-transport-https curl"
-			sh "docker --version"
+	stage ("install docker, curl & https & check docker version"){
+	  steps{
+	     sh "sudo apt-get update"
+             sh "sudo apt-get install docker.io -y" 
+             sh "sudo apt-get update && apt-get install -y apt-transport-https curl"
+	     sh "docker --version"
 		}
 	}
 
