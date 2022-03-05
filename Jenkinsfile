@@ -51,10 +51,15 @@ pipeline {
     
 	stage('Install Kubernetes'){
 		steps{
-			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
+			sh "sudo ansible-playbook -i hosts all install-kubernetes.yaml"
 		}
 	}
 
+	stage('Spin-up K8S Cluster'){
+		steps{
+			sh "sudo ansible-playbook -i hosts all spinup_k8s_cluster.yaml"
+		}
+	}
 
 	}
 }
