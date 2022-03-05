@@ -1,11 +1,3 @@
-[masters]
-devops-master
-
-[workers]
-d-dev
-d-test
-d-prod
-
 [servers]
 devops-master
 d-dev
