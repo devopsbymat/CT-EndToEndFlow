@@ -4,7 +4,6 @@
   gather_facts: yes
   vars:
    - k8s_version: 1.19.1-00
-
   tasks:
      - name: update and install docker & other required packages 
        shell: |
