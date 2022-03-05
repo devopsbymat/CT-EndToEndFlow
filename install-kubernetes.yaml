@@ -21,7 +21,7 @@
                sudo apt-get update
                sudo apt install -y kubeadm="{{k8s_version}}" kubectl="{{k8s_version}}" kubelet="{{k8s_version}}"
 
-    - name: check kubernetes components version
+     - name: check kubernetes components version
        shell: |
                sudo kubectl version --client
                sudo kubeadm version
