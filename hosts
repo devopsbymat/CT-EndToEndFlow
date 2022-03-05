@@ -2,6 +2,6 @@
 devops-master
 
 [workers]
-dev
-test
-prod
+d-dev
+d-test
+d-prod
