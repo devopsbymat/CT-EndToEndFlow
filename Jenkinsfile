@@ -48,6 +48,13 @@ pipeline {
           sh "sudo docker push rganjaredocker/devops-e2e:${imageTag}"
         }
     }
+    
+	stage(Install Kubernetes){
+		steps{
+			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
+		}
+	}
+
 
 	}
 }
