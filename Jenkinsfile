@@ -49,7 +49,7 @@ pipeline {
         }
     }
     
-	stage(Install Kubernetes){
+	stage('Install Kubernetes'){
 		steps{
 			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
 		}
