@@ -1,5 +1,7 @@
-[servers]
+[masters]
 devops-master
+
+[workers]
 d-dev
 d-test
 d-prod
