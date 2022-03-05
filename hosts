@@ -5,3 +5,9 @@ devops-master
 d-dev
 d-test
 d-prod
+
+[servers]
+devops-master
+d-dev
+d-test
+d-prod

@@ -1,5 +1,5 @@
 ---
-- hosts: "masters, workers"
+- hosts: "servers"
   become: yes
   gather_facts: yes
   vars:
