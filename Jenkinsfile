@@ -53,14 +53,23 @@ pipeline {
 		steps{
 			sh "sudo ansible -i hosts all -m ping"
 			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
+			sh "sudo kubectl version --client"
+			sh "sudo kubeadm version"
 		}
 	}
 
 	stage('Spin-up K8S Cluster'){
 		steps{
 			sh "sudo ansible-playbook -i hosts spinup_k8s_cluster.yaml"
+			sh "sudo kubectl cluster-info"
 		}
 	}
 
+	stage('Join Servers'){
+		steps{
+			sh "sudo ansible-playbook -i hosts join-workers.yaml"
+			sh "kubectl get nodes"
+		}
+	}
 	}
 }
