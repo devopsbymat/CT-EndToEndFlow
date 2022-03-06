@@ -60,12 +60,8 @@ pipeline {
 
 	stage('Spin-up K8S Cluster'){
 		steps{
-			sh "sudo ansible-playbook -i hosts spinup_k8s_cluster.yaml"
-			sh "sudo mkdir -p $HOME/.kube"
-            sh "sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config"
-            sh "sudo chown $(id -u):$(id -g)"
-			sh "sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml"
-			sh "sudo kubectl cluster-info"
+			sh "ansible-playbook -i hosts spinup_k8s_cluster.yaml"
+			sh "kubectl cluster-info"
 		}
 	}
 
