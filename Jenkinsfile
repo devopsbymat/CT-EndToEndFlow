@@ -67,6 +67,7 @@ pipeline {
 	stage('Join Servers'){
 		steps{
 			sh "sudo ansible-playbook -i hosts join-workers.yaml"
+			
 		}
 	}
 	}
