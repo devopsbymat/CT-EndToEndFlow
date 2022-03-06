@@ -1,6 +1,5 @@
 ---
 - hosts: "masters,workers"
-  become: yes
   gather_facts: yes
   vars:
    - k8s_version: 1.19.1-00
