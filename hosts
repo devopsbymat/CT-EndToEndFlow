@@ -1,7 +1,7 @@
 [masters]
-devops-master
+devops-master ansible_user=ubuntu
 
 [workers]
-d-dev
-d-test
-d-prod
+d-dev ansible_user=ubuntu
+d-test ansible_user=ubuntu
+d-prod ansible_user=ubuntu
