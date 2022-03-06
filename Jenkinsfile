@@ -51,7 +51,7 @@ pipeline {
     
 	stage('Install K8S'){
 		steps{
-			sh "sudo ansible -i hosts all -m ping -u root --private-key=/root/.ssh/id_rsa"
+			sh "sudo ansible -i hosts all -m ping"
 			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
 			sh "sudo kubectl version --client"
 			sh "sudo kubeadm version"
