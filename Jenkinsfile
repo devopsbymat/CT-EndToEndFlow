@@ -69,6 +69,8 @@ pipeline {
 		steps{
 			sh "sudo ansible-playbook -i hosts join-workers.yaml"
 			sh "kubectl get nodes"
+			sh "kubectl get nodes"
+			sh "kubectl get nodes"
 		}
 	}
 	}
