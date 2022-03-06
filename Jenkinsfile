@@ -51,6 +51,7 @@ pipeline {
     
 	stage('Install K8S'){
 		steps{
+			sh "sudo ansible -i hosts all -m ping"
 			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
 		}
 	}
