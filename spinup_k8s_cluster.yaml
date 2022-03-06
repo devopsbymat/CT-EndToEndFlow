@@ -1,6 +1,5 @@
 ---
 - hosts: "masters"
-  become: yes
   gather_facts: yes
   vars:
    - master_private_ip: 10.128.0.29
@@ -16,12 +15,9 @@
                mkdir -p $HOME/.kube
                sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
                sudo chown $(id -u):$(id -g) $HOME/.kube/config
-               kubectl cluster-info
 
      - name: install the network plugin
-       shell: |
-               kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
-               kubectl get node
+       shell: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
      - name: Get the token for joining the worker nodes
        become: yes
