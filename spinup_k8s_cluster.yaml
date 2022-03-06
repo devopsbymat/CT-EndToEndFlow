@@ -8,7 +8,9 @@
   tasks:
      - name: initialize k8s cluster on master server 
        become: yes
-       shell: sudo kubeadm init --apiserver-advertise-address={{ master_private_ip }} --pod-network-cidr={{ cidr_range }} --ignore-preflight-errors=NumCPU
+       shell: |
+               sudo kubeadm reset
+               sudo kubeadm init --apiserver-advertise-address={{ master_private_ip }} --pod-network-cidr={{ cidr_range }} --ignore-preflight-errors=NumCPU
     
      - name: copy admin.conf to home kube directory and get cluster-info
        shell: |
