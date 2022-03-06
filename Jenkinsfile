@@ -34,7 +34,7 @@ pipeline {
 
     stage('Clean Containers'){
         steps {
-            sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];fi"
+            sh "sudo docker ps -a"
         }
     }
     stage('Build'){
@@ -67,7 +67,7 @@ pipeline {
 	stage('Join Servers'){
 		steps{
 			sh "sudo ansible-playbook -i hosts join-workers.yaml"
-			
+
 		}
 	}
 	}
