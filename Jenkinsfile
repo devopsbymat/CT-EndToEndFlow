@@ -51,6 +51,8 @@ pipeline {
     
 	stage('Install Kubernetes'){
 		steps{
+			sh "pwd"
+			sh "sudo cd /home/ubuntu/jenkins/workspace/jenkins-pipeline"
 			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
 		}
 	}
