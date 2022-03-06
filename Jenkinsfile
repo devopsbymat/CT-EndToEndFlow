@@ -16,13 +16,13 @@ pipeline {
     }
 
     stages {
-    stage('SCM checkout'){
+    stage('SCM Checkout'){
         steps {
             checkout([$class: 'GitSCM', branches: [[name: "*/${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'github-Cred', url: "${gitURL}"]]])
         }
     }
 
-    stage ("install docker, curl & https & check docker version"){
+    stage ("Install Docker"){
         steps{
             sh "sudo apt-get update"
             sh "sudo apt-get install docker.io -y" 
@@ -32,7 +32,7 @@ pipeline {
         }
     }
 
-    stage('Remove old docker containers if any with same name'){
+    stage('Clean Containers'){
         steps {
             sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo [docker rm -f \$(sudo docker ps -a -q)];fi"
         }
@@ -49,10 +49,8 @@ pipeline {
         }
     }
     
-	stage('Install Kubernetes'){
+	stage('Install K8S'){
 		steps{
-			sh "pwd"
-			sh "sudo cd /home/ubuntu/jenkins/workspace/jenkins-pipeline"
 			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
 		}
 	}
