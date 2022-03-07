@@ -32,7 +32,7 @@ pipeline {
         }
     }
 
-    stage('Clean Containers'){
+    stage('Get Containers'){
         steps {
             sh "sudo docker ps -a"
         }
@@ -49,29 +49,12 @@ pipeline {
         }
     }
     
-	stage('Install K8S'){
+	stage('Get K8S cluster & Nodes'){
 		steps{
-			sh "sudo ansible -i hosts all -m ping"
-			sh "sudo ansible-playbook -i hosts install-kubernetes.yaml"
-			sh "sudo kubectl version --client"
-			sh "sudo kubeadm version"
+			sh "sudo kubectl cluster-info"
+			sh "sudo kubectl get nodes"
 		}
 	}
 
-	stage('Spin-up K8S Cluster'){
-		steps{
-			sh "ansible-playbook -i hosts spinup_k8s_cluster.yaml"
-			sh "kubectl cluster-info"
-		}
-	}
-
-	stage('Join Servers'){
-		steps{
-			sh "sudo ansible-playbook -i hosts join-workers.yaml"
-			sh "kubectl get nodes"
-			sh "kubectl get nodes"
-			sh "kubectl get nodes"
-		}
-	}
 	}
 }
