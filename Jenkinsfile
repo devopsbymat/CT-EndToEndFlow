@@ -49,10 +49,10 @@ pipeline {
         }
     }
     
-	stage('Get K8S cluster & Nodes'){
+	stage('Get K8S Nodes'){
 		steps{
-			sh "sudo kubectl cluster-info"
-			sh "sudo kubectl get nodes"
+			sh "kubectl cluster-info"
+			sh "kubectl get nodes"
 		}
 	}
 
