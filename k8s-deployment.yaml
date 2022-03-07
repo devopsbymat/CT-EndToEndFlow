@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ct-deployment
+  labels:
+    app: ct
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ct
+  template:
+    metadata:
+      labels:
+        app: ct
+    spec:
+      containers:
+      - name: ct
+        image: rganjaredocker/devops-e2e:apache-latest
+        ports:
+        - containerPort: 80
