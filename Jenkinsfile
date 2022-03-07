@@ -56,15 +56,17 @@ pipeline {
 		}
 	}
 
-    stage('Create Deployment')
+    stage('Create Deployment'){
         steps{
             sh "kubectl apply -f k8s-deployment.yaml"
         }
+    }
 
     stage('Deployment status'){
         steps{
             sh "kubectl get pod -o wide"
         }
     }
+    
 	}
 }
