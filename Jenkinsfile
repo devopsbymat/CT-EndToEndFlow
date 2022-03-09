@@ -5,7 +5,7 @@ def branchName = 'master'
 pipeline {
     agent {
         node {
-            label 'devOps-master'
+            label 'd-master'
         }
     }
     parameters {
@@ -67,6 +67,6 @@ pipeline {
             sh "kubectl get pod -o wide"
         }
     }
-    
+
 	}
 }

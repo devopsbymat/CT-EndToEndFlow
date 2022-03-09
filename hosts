@@ -1,5 +1,5 @@
 [masters]
-devops-master
+d-master
 
 [workers]
 d-dev
