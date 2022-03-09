@@ -56,9 +56,15 @@ pipeline {
 		}
 	}
 
-    stage('Create Deployment'){
+    stage('Start CT Deployment'){
         steps{
-            sh "kubectl apply -f k8s-deployment.yaml"
+            sh "kubectl apply -f CT_deployment.yaml"
+        }
+    }
+
+    stage('Start php deployment'){
+        steps{
+            sh "kubectl apply -f php_deployment.yaml"
         }
     }
 
