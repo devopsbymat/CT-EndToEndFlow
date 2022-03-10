@@ -55,7 +55,11 @@ pipeline {
 			sh "kubectl get nodes"
 		}
 	}
-
+    stage('Start Nginx Deployment'){
+        steps{
+            sh "kubectl apply -f nginx_deployment.yaml"
+        }
+    }
     stage('Start CT Deployment'){
         steps{
             sh "kubectl apply -f CT_deployment.yaml"
